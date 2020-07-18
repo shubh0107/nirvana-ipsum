@@ -5,9 +5,7 @@ const Button = styled.button`
   display: inline-flex;
   align-items: center;
   background: white;
-  // color: white;
   padding: 0 16px;
-  // border: 2px solid yellow;
   border: none;
   outline: none;
   cursor: pointer;

@@ -16,7 +16,6 @@ const generateText = (type, count) => {
         break;
       default:
         result = getSentences(+count);
-        break;
     }
     return result;
   } else {

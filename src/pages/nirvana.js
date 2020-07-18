@@ -14,23 +14,17 @@ const Container = styled.div`
   background: black;
   height: 100%;
   width: 100%;
-  // max-width: 600px;
-  // margin: 8px;
-  // color: yellow;
   border: 8px solid yellow;
 `
 const Content = styled.div`
   max-width: 600px;
-  // background: black;
   color: yellow;
   margin: 0 auto;
 
   @media only screen and (max-width: 650px) {
     padding: 0 16px;
   }
-
 `
-
 const Header = styled.div`
   display: flex;
   justify-content: center;
@@ -38,52 +32,31 @@ const Header = styled.div`
   margin: 16px 0 8px 0;
   font-family: 'Oswald';
 
-
   @media only screen and (max-width: 480px) {
     flex-direction: column;
   }
-
-  
 `
-
 const Controls = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // margin: 16px;
-
 
   *:not(:first-child) {
     margin-left: 8px;
     margin-top: 8px;
   }
 
-
-  #copy {
-    // margin-left: auto;
-  }
-  
-
-
   @media only screen and (max-width: 480px) {
-    // max-height: 54vh;
     flex-direction: column;
-
-    #generate {
-      // margin-left: auto;
-    }
 
     #copy {
       margin-top: 8px;
+      margin-left: auto;
+      margin-right: 6px;
     }
   }
-  
-
-
 `
-
 const Result = styled.div`
-  // height: 100%;
   max-height: 70vh;
   overflow-y: auto;
   align-items: center;
@@ -91,6 +64,10 @@ const Result = styled.div`
   margin: 24px auto;
   font-family: 'Oswald';
   font-size: 20px;
+
+  p:first-of-type {
+    margin-top: 0;
+  }
   
   ::-webkit-scrollbar {
     width: 3px;
@@ -98,7 +75,6 @@ const Result = styled.div`
   
   /* Track */
   ::-webkit-scrollbar-track {
-    // background: #f1f1f1; 
   }
    
   /* Handle */
@@ -112,15 +88,9 @@ const Result = styled.div`
   }
 
   @media only screen and (max-width: 480px) {
-    max-height: 54vh;
+    max-height: 39vh;
   }
-
-
 `
-
-
-
-
 
 
 const Nirvana = props => {
