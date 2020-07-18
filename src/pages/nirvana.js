@@ -5,6 +5,9 @@ import { generateText } from '../api';
 import { Button, Input, Select } from '../components';
 
 import NirvanaLogo from '../assets/images/NirvanaLogo.svg';
+import Copy from '../assets/images/Copy.svg';
+
+import copy from 'copy-to-clipboard';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -32,7 +35,7 @@ const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 16px 0;
+  margin: 16px 0 8px 0;
   font-family: 'Oswald';
 
 
@@ -45,21 +48,35 @@ const Header = styled.div`
 
 const Controls = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   // margin: 16px;
 
 
   *:not(:first-child) {
     margin-left: 8px;
+    margin-top: 8px;
   }
 
 
-  ${Button} {
-    margin-left: auto;
+  #copy {
+    // margin-left: auto;
   }
+  
 
 
+  @media only screen and (max-width: 480px) {
+    // max-height: 54vh;
+    flex-direction: column;
 
+    #generate {
+      // margin-left: auto;
+    }
+
+    #copy {
+      margin-top: 8px;
+    }
+  }
   
 
 
@@ -125,6 +142,13 @@ const Nirvana = props => {
   }
 
 
+  const handleCopy = () => {
+    if (result) {
+      copy(result);
+    }
+  }
+
+
   return (
     <Container>
 
@@ -135,15 +159,19 @@ const Nirvana = props => {
           <h1>Ipsum</h1>
         </Header>
         <Controls>
-          <Input type="number" min="1" id="count" name="count" value={count} onChange={e => setCount(e.target.value)} />
-
-          <Select id="ipsumType" name="ipsumType" onChange={e => setIpsumType(e.target.value)}>
-            <option value="paragraphs">Paragraphs</option>
-            <option value="sentences">Sentences</option>
-            <option value="words">Words</option>
-          </Select>
-
-          <Button onClick={e => generate()}>Generate</Button>
+          <div>
+            <Input type="number" min="1" id="count" name="count" value={count} onChange={e => setCount(e.target.value)} />
+            <Select id="ipsumType" name="ipsumType" onChange={e => setIpsumType(e.target.value)}>
+              <option value="paragraphs">Paragraphs</option>
+              <option value="sentences">Sentences</option>
+              <option value="words">Words</option>
+            </Select>
+            <Button id="generate" onClick={e => generate()}>Generate</Button>
+          </div>
+          <Button id="copy" onClick={e => handleCopy()}>
+            Copy
+            <img src={Copy} alt="Copy" />
+          </Button>
         </Controls>
 
         {result &&

@@ -9,20 +9,17 @@ function getRandomItemFromArray(arr) {
 }
 
 export function getWords(n) {
-  console.log('im herer', n);
   let words = '';
   do {
+    let currentWordLength = words.split(' ').filter(item => item !== '').length;
     let song = getRandomItemFromArray(songs);
     let lineFromTheLyrics = getRandomItemFromArray(song.lyrics);
-
-    if (n > (words.split(' ').filter(item => item !== '').length + lineFromTheLyrics.split(' ').length)) {
-      words += lineFromTheLyrics;
+    if (n > (currentWordLength + lineFromTheLyrics.split(' ').length)) {
+      words += lineFromTheLyrics + ' ';
     } else {
-      console.log('hree: ', words);
-      words += lineFromTheLyrics.split(' ').splice(0, n).join(' ');
+      words += ' ' + lineFromTheLyrics.split(' ').splice(0, n - currentWordLength).join(' ');
     }
-
-  } while (words.split(' ').filter(item => item !== '').length != n);
+  } while (words.split(' ').filter(item => item !== '').length < n);
   return words + '.';
 
 }

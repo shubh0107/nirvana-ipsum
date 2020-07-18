@@ -2,30 +2,24 @@ import { getParagraphs, getSentences, getWords } from './utils';
 
 
 const generateText = (type, count) => {
-  console.log('type: ', type);
   if (count > 0) {
     let result = '';
     switch (type) {
       case 'paragraphs':
-        result = getParagraphs(count);
-        // setResult(result);
+        result = getParagraphs(+count);
         break;
       case 'sentences':
-        result = getSentences(count);
-        // setResult(result);
+        result = getSentences(+count);
         break;
       case 'words':
-        result = getWords(count);
-        // setResult(result);
+        result = getWords(+count);
         break;
       default:
-        result = getSentences(count);
-        // setResult(result);
+        result = getSentences(+count);
         break;
     }
     return result;
   } else {
-    // setResult(null);
     return null;
   }
 }
