@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.css';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Footer } from './components'
-
-import Nirvana from './pages/nirvana';
+import {Nirvana, PageNotFound} from './pages';
 
 function App() {
   return (
     <main>
-      <Nirvana />
-      <Footer />
+      <Router>
+        <Route exact path='/'>
+          <Nirvana />
+          <Footer />
+        </Route>
+        <Route path="*">
+          <PageNotFound />
+        </Route>
+      </Router>
     </main>
   );
 }

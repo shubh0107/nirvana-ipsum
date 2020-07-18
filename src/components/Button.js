@@ -11,7 +11,6 @@ const Button = styled.button`
   cursor: pointer;
   font-size: 16px;
 
-
   img {
     width: 16px;
     margin-left: 8px;

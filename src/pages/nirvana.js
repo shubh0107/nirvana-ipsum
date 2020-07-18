@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import copy from 'copy-to-clipboard';
 
-import { generateText } from '../api';
-import { Button, Input, Select } from '../components';
 import NirvanaLogo from '../assets/images/NirvanaLogo.svg';
 import Copy from '../assets/images/Copy.svg';
+import { generateText } from '../api';
+import { Button, Input, Select } from '../components';
+import { track } from '../utils';
 
 const Container = styled.div`
   box-sizing: border-box;
   background: black;
-  height: 100%;
+  height: 98%;
   width: 100%;
   border: 8px solid yellow;
 `
@@ -32,6 +33,10 @@ const Header = styled.div`
 
   @media only screen and (max-width: 480px) {
     flex-direction: column;
+
+    h1 {
+      margin: 12px 0;
+    }
   }
 `
 const Controls = styled.div`
@@ -44,13 +49,33 @@ const Controls = styled.div`
     margin-top: 8px;
   }
 
+  #left-controls {
+    display: flex;
+    justify-content: space-between; 
+  }
+
   @media only screen and (max-width: 480px) {
     flex-direction: column;
+    align-items: unset;
+
+    #left-controls {
+      display: flex;
+      justify-content: space-between; 
+      width: 100%;
+      input, select {
+        margin-right: auto;
+      }
+
+      #generate {
+        margin-left: auto;
+      }
+    }
 
     #copy {
       margin-top: 8px;
+      margin-right: 0;
       margin-left: auto;
-      margin-right: 6px;
+      padding: 0 19px;
     }
   }
 `
@@ -97,6 +122,12 @@ const Nirvana = props => {
   const [result, setResult] = useState(null);
 
   const generate = () => {
+    track("Generate text", {
+      value: {
+        type: ipsumType,
+        count
+      }
+    });
     if (count < 999) {
       const result = generateText(ipsumType, count);
       setResult(result);
@@ -107,10 +138,15 @@ const Nirvana = props => {
     }
   }
 
+  const handleTypeChange = type => {
+    track("Change type", { value: type });
+    setIpsumType(type);
+  }
 
   const handleCopy = () => {
     if (result) {
       copy(result);
+      track("Copy to clipboard", { value: result });
     }
   }
 
@@ -122,13 +158,15 @@ const Nirvana = props => {
           <h1>Ipsum</h1>
         </Header>
         <Controls>
-          <div>
-            <Input type="number" min="1" id="count" name="count" value={count} onChange={e => setCount(e.target.value)} />
-            <Select id="ipsumType" name="ipsumType" onChange={e => setIpsumType(e.target.value)}>
-              <option value="paragraphs">Paragraphs</option>
-              <option value="sentences">Sentences</option>
-              <option value="words">Words</option>
-            </Select>
+          <div id="left-controls">
+            <div>
+              <Input type="number" min="1" id="count" name="count" value={count} onChange={e => setCount(e.target.value)} />
+              <Select id="ipsumType" name="ipsumType" onChange={e => handleTypeChange(e.target.value)}>
+                <option value="paragraphs">{count > 1 ? 'Paragraphs' : 'Paragraph'}</option>
+                <option value="sentences">{count > 1 ? 'Sentences' : 'Sentence'}</option>
+                <option value="words">{count > 1 ? 'Words' : 'Word'}</option>
+              </Select>
+            </div>
             <Button id="generate" onClick={e => generate()}>Generate</Button>
           </div>
           <Button id="copy" onClick={e => handleCopy()}>

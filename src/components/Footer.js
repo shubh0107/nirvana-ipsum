@@ -38,6 +38,7 @@ const StyledLink = styled.a`
   text-decoration: none;
   width: fit-content;
   margin: 0 18px;
+  color: black;
   svg {
     height: 18px;
     width: 18px;
