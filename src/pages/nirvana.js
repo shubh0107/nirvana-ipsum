@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import copy from 'copy-to-clipboard';
 
 import { generateText } from '../api';
 import { Button, Input, Select } from '../components';
-
 import NirvanaLogo from '../assets/images/NirvanaLogo.svg';
 import Copy from '../assets/images/Copy.svg';
-
-import copy from 'copy-to-clipboard';
 
 const Container = styled.div`
   box-sizing: border-box;
@@ -94,11 +92,9 @@ const Result = styled.div`
 
 
 const Nirvana = props => {
-
   const [count, setCount] = useState(1);
   const [ipsumType, setIpsumType] = useState('paragraphs');
   const [result, setResult] = useState(null);
-
 
   const generate = () => {
     if (count < 999) {
@@ -118,12 +114,9 @@ const Nirvana = props => {
     }
   }
 
-
   return (
     <Container>
-
       <Content>
-
         <Header>
           <img src={NirvanaLogo} alt="Nirvana" />
           <h1>Ipsum</h1>
@@ -143,7 +136,6 @@ const Nirvana = props => {
             <img src={Copy} alt="Copy" />
           </Button>
         </Controls>
-
         {result &&
           <Result>
             {
@@ -152,8 +144,6 @@ const Nirvana = props => {
           </Result>
         }
       </Content>
-
-
     </Container>
   )
 

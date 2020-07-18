@@ -1,11 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { ReactComponent as TwitterLogo } from '../assets/images/twitter.svg';
 import { ReactComponent as GithubLogo } from '../assets/images/github.svg';
 import { ReactComponent as LinkedInLogo } from '../assets/images/linkedin.svg';
-
-
 
 const StyledFooter = styled.div`
   display: flex;
